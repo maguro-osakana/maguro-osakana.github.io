@@ -1,8 +1,8 @@
-# 2万円台のGDDR6 16GBワンボードPCで27BローカルLLMを動かす ― 半導体高騰を乗り切る構成
+# 2万円のGDDR6 16GBワンボードPCで27BローカルLLMを動かす ― 半導体高騰を乗り切る構成
 
 ![BC-250ボード写真](./bc250-pcb.jpg)
 
-メモリもGPUも高騰している今、新GPUを揃えてローカルLLMを動かすのは気軽にできない。しかし、PS5をベースにしたワンボードPCなら、2万円程度（2026年8月末時点のAliExpress調べ）で、GDDR6 16GBのGPUメモリを確保できる。手元に余っているM.2 SSDがあれば、この板1枚でQwen3.8 27Bモデルが動作する環境が構築できる。
+メモリもGPUも高騰している今、新GPUを揃えてローカルLLMを動かすのは気軽にできない。しかし、PS5をベースにしたワンボードPCなら、2万円程度（2026年8月末時点のAliExpress調べ）で、GDDR6 16GBのGPUメモリを確保できる。手元に余っているM.2 SSDがあれば、この板1枚でQwen3.8 27B 4bit量子化モデルが20tokens/secで動作する環境が構築できる。
 
 ![AliExpressでの価格](./bc250-ali.png)
 
@@ -64,7 +64,7 @@ sudo ufw reload
 
 ## 4. 改造BIOSの導入とBIOS設定
 
-GPU側へのメモリ割り当てを最大化するため、改造BIOSを導入する。詳細は **`BC250_3.00_CHIPSETMENU.ROM`** で検索すると見つかる。最近のOSなら改造BIOSなしで設定できるらしいが、筆者の環境では無理だった。
+GPU側へのメモリ割り当てを最大化するため、改造BIOSを導入する。詳細は **`BC250_3.00_CHIPSETMENU.ROM`** で検索すると見つかる。最近のLinuxなら改造BIOSなしで設定できるらしいが、筆者の環境では無理だった。
 
 改造BIOSを焼いた後、BIOS設定で以下を変更する。
 
@@ -73,7 +73,7 @@ GPU側へのメモリ割り当てを最大化するため、改造BIOSを導入�
 - UMA Frame Buffer Size = **512MB**
 - IOMMU = **Disable**
 
-## 5. GRUBカーネル引数の変更
+## 5. TTMのメモリ上限を16GBまで拡大する
 
 UMAを512MBに設定したら、`/etc/default/grub` を編集し、`GRUB_CMDLINE_LINUX_DEFAULT` の**末尾に** `ttm.pages_limit=4194304` を追加する（4194304ページ × 4KB = 16GB、つまりGDDR6の容量全体をTTM管理の上限に合わせる値）。
 
@@ -94,6 +94,8 @@ GRUB_CMDLINE_LINUX_DEFAULT='nowatchdog nvme_load=YES splash loglevel=3 ttm.pages
 ```bash
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
+
+
 
 ## 6. GPUガバナの導入（cyan-skillfish-governor-smu）
 
@@ -212,7 +214,7 @@ $ uname -vr
 
 で教えてもらえると思う。
 
-Qwen3.8 27Bは**Q4量子化まで**動いた。筆者が使っている起動オプションは以下（あとで追記）。
+Qwen3.8 27Bは**Q4量子化まで**動いた。筆者が使っている起動オプションは以下です。
 
 ```bash
 ./build/bin/llama-cli \
@@ -255,7 +257,8 @@ Qwen3.8 27Bは**Q4量子化まで**動いた。筆者が使っている起動オ
 ## 9. 成果
 
 ここまでで、**自宅で約20 tokens/secのローカルLLM**が手に入る。2万円板 + 手元のSSD + 12V電源 + ファン、という構成で半導体高騰期を乗り切れる、というわけだ。
-この記事は、上で構築したQwen3.8-27B-UD-IQ4_XSにインストール時のメモを渡してまとめてもらいました、これくらいの内容ならできる感じです。
+
+この記事は、上で構築したQwen3.8-27B-UD-IQ4_XSにインストール時のメモを渡してまとめてもらいました、これくらいの内容ならできる感じです。（文体が違う箇所は手で追記しました、例えばここ）
 
 ![ブラウザ画面](./bc250-chrome.png)
 
