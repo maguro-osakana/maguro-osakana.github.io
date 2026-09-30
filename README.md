@@ -9,3 +9,4 @@
 
 ## 作ったもの
 - [LenzContext(Python) - JpegファイルのGPS情報から住所を推定して、LLMを使って画像内容を推定してYAMLで出力するツール](https://github.com/maguro-osakana/LenzContext)
+- [ams社 CO2センサチップ CCS811を使ったCO2監視ボード](https://github.com/maguro-osakana/ccs811_eco2_pic_monitor)
