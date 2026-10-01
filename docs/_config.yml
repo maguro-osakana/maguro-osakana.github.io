@@ -2,8 +2,8 @@ title: maguro-osakana.github.io
 theme: jekyll-theme-primer
 
 # GoatCounter code を設定すると全ページでアクセス解析が有効になります。
-# 例: https://maguro-osakana.goatcounter.com/ の場合は maguro-osakana
-goatcounter_code: ""
+# https://maguroosakana.goatcounter.com/
+goatcounter_code: "maguroosakana"
 
 defaults:
   - scope:
