@@ -1,6 +1,7 @@
 title: maguro-osakana.github.io
 theme: jekyll-theme-primer
 locale: ja_JP
+lang: ja-JP
 
 # GoatCounter code を設定すると全ページでアクセス解析が有効になります。
 # https://maguroosakana.goatcounter.com/
