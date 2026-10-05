@@ -1,0 +1,38 @@
+{% unless page.url == "/" %}
+<style>
+  .site-top-link {
+    margin-bottom: 24px;
+    font-size: 16px;
+  }
+
+  .site-top-link a {
+    text-decoration: none;
+  }
+
+  .site-top-link a:hover {
+    text-decoration: underline;
+  }
+
+  .site-top-link .home-icon {
+    margin-right: 4px;
+  }
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const content = document.querySelector(".markdown-body");
+  if (!content) return;
+
+  const nav = document.createElement("div");
+  nav.className = "site-top-link";
+
+  const link = document.createElement("a");
+  link.href = "{{ '/' | relative_url }}";
+  link.innerHTML =
+    '<span class="home-icon" aria-hidden="true">⌂</span>maguro-osakana🐟';
+
+  nav.appendChild(link);
+  content.prepend(nav);
+});
+</script>
+{% endunless %}
