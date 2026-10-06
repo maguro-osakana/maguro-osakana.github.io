@@ -1,10 +1,10 @@
-# EPSON Rangefinder Digital Camera R-D1の解析 ― CCDメインボード編
+# EPSON Rangefinder Digital Camera R-D1の解析 ― CCD基板編
 
 [← 目次へ戻る](./index.md)
 
 EPSON R-D1は、2004年にEPSONから発売された世界初のMマウント対応レンジファインダーデジタルカメラです。
 
-本記事では、R-D1に搭載されているCCDメインボードについて、基板上の主要デバイスとCCD駆動回路を中心に解析します。
+本記事では、R-D1に搭載されているCCD基板について、基板上の主要デバイスとCCD駆動回路を中心に解析します。
 
 > **注意**
 >
@@ -21,9 +21,9 @@ CCD基板そのものの写真については、[Camera QuestのEpson R-D1: Tota
 
 ## CCD基板の構成
 
-![図1：R-D1 CCD基板レイアウト](ccdpcb.png)
+![図1：R-D1 CCD基板レイアウト](ccd1.png)
 
-図1：CCD基板を部品面側から見たレイアウト。CCDは基板裏面に実装されています
+**図1：CCD基板を部品面側から見たレイアウト。CCDは基板裏面に実装されています**
 
 図1は、R-D1のCCD基板を部品面側から見たレイアウトを模式的に示したものです。
 
@@ -71,9 +71,9 @@ AD9895はデジタルカメラ向けのCCD Signal Processor / Timing Generator�
 
 ## CCD駆動クロック
 
-![図2：R-D1 CCD駆動系ブロック図](diagram.png)
+![図2：R-D1 CCD駆動系ブロック図](ccd2.png)
 
-図2：AD9895、CXD3400N、ハーフブリッジ、ICX413間のCCD駆動信号系統。
+**図2：AD9895、CXD3400N、ハーフブリッジ、ICX413間のCCD駆動信号系統**
 
 AD9895で生成されたクロック信号は、そのままではCCDを直接駆動できません。
 
