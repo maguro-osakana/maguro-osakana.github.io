@@ -2,6 +2,7 @@
 
 ## 書いたもの
 - [2万円のGDDR6 16GBワンボードPCで27BローカルLLMを動かす ― 半導体高騰を乗り切る構成](./docs/bc250/)
+- [EPSON Rangefinder Digital Camera R-D1の解析](./docs/r-d1/)
 
 ## 作ったもの
 - [LenzContext(Python) - JpegファイルのGPS情報から住所を推定して、LLMを使って画像内容を推定してYAMLで出力するツール](https://github.com/maguro-osakana/LenzContext)
